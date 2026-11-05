@@ -8,6 +8,14 @@ class Matrix {
             if (rows < 0 || cols < 0) {
                 throw std::invalid_argument("Matrix dimensions cannot be negative");
             }
+            if (static_cast<long long>(rows) * cols > 10000000LL) {
+                throw std::length_error("Matrix is too large");
+            }
+            allocateData();
+        }
+
+        // Copy constructor: needed so a Matrix can be passed/returned by value
+        Matrix(const Matrix& other) : rows_(other.rows_), cols_(other.cols_), data_(nullptr) {
             allocateData();
         }
 
